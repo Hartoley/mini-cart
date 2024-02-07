@@ -66,21 +66,17 @@
     <button onclick="clickit()">Click</button>
 
     <table>
-      <tr id="top">
+      <thead id="top">
         <th>Item</th>
         <th>Quantity</th>
         <th>Price per 1</th>
         <th>Total</th>
         <th>Delete</th>
-      </tr>
+      </thead>
 
-      <tr>
-        <td id="titem"></td>
-        <td id="tquantity"></td>
-        <td id="tprice"></td>
-        <td id="total"></td>
-        <td id="clear"></td>
-      </tr>
+      <tbody id="tr">
+        
+      </tbody>
 
         
     </table>
@@ -99,47 +95,41 @@
     let del= document.createElement('button')
     del.innerText='delete'
     let Aitem=[]
-    let Aprice=[]
-    let Aquantity=[]
-    let Atotal=[]
+    
 
 
 
     function clickit(){
-        clear.append(del)
-        Aitem.push(item.value)
-        Aprice.push(price.value)
-        Aquantity.push(numbers.value)
-        titem.innerHTML=Aitem.join('<br>')
-        tquantity.innerHTML=Aquantity.join('<br>')
-        tprice.innerHTML=Aprice.join('<br>')
-        tota=price.value*numbers.value
-        Atotal.push(tota)
-        total.innerHTML= Atotal.join('<br>')
+        let summary={
+            product:item.value,
+            pricee:price.value,
+            numbers:numbers.value,
+
+        }
         
-        // clear.innerHTML= del
+        Aitem.push(summary)
+        tr.innerHTML=' '
+       display()
+      
        
         
         
         
     }
 
-    del.addEventListener('click', (index) => {
-        //  alert('New button clicked!'); 
-         titem.innerHTML=Aitem.splice(index,1)
-        tquantity.innerHTML=Aquantity.splice(index,1)
-        tprice.innerHTML=Aprice.splice(index,1)
-        total.innerHTML=Atotal.splice(index,1)
-        });
+    function display (){
+        Aitem.forEach(function ({product,numbers,pricee},i) {
+            tr.innerHTML+=`<tr><td>${product}</td><td>${numbers}</td><td>${pricee}</td><td>${pricee*numbers}</td><td><button onclick="remove(${i})">remove</button></td></tr>`
+            console.log(Aitem)
+        })
+    }
 
-    function delet(index){
-        
+    
 
+  
+    function remove(i){
+        Aitem.splice(i,1)
+  
 
-
-        // titem.innerHTML=Aitem.splice(index,1)
-        // tquantity.innerHTML=''
-        // tprice.innerHTML=''
-        // total.innerHTML=''
     }
 </script>
